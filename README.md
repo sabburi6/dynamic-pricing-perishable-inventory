@@ -28,3 +28,41 @@ The system is built as a five-stage pipeline:
 Both datasets are publicly available. 
 The two datasets have no shared product identifiers, so they cannot be merged directly. Instead, price elasticity values estimated from the Dunnhumby panel are applied to matching product categories in the perishable dataset (e.g., Dunnhumby's PRODUCE department maps to the Produce category). This allows the optimizer to use real-world price sensitivity data without requiring a row-level join.
 
+## Key Results
+
+**Demand Forecasting**
+| Model | RMSE | MAE | Directional Accuracy |
+|-------|------|-----|---------------------|
+| LightGBM | 858.4 | 662.6 | 62.3% |
+| Holt-Winters | 923.2 | 741.7 | 47.3% |
+
+**Spoilage Classification**
+| Model | ROC-AUC | Brier Score | F1 |
+|-------|---------|-------------|-----|
+| LightGBM | 0.853 | 0.154 | 0.783 |
+| XGBoost | 0.852 | 0.154 | 0.785 |
+| Random Forest | 0.828 | 0.171 | 0.767 |
+| Logistic Regression | 0.722 | 0.216 | 0.707 |
+
+**60-Day Simulation — Strategy Comparison**
+| Strategy | Revenue | Profit | Waste Rate | Sell-Through |
+|----------|---------|--------|------------|-------------|
+| No Discount | $10.27M | $419K | 33.5% | 66.0% |
+| Fixed 20% | $10.22M | $349K | 22.9% | 75.0% |
+| Dynamic | $11.85M | $1.99M | 16.8% | 79.0% |
+
+Dynamic pricing delivered a **376% profit gain** over the no-discount baseline while cutting waste from 33.5% to 16.8%.
+
+**Category Highlights:**
+- Bakery: reversed a $95K loss into a $95K gain
+- Seafood: reversed a $279K loss into a $362K gain
+- Near-expiry items (1–2 days): average 23% discount, moved most inventory before spoilage
+
+## Tech Stack
+
+- **Language:** Python 3.11
+- **ML Models:** LightGBM, XGBoost, Scikit-learn, Statsmodels
+- **Data Processing:** Pandas, NumPy
+- **Visualization:** Matplotlib, Seaborn
+- **Dashboard:** Streamlit
+- **Evaluation:** SHAP, ROC-AUC, RMSE, Brier Score
