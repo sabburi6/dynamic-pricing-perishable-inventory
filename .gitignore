@@ -1,0 +1,43 @@
+# Datasets (too large for GitHub — see README for download links)
+data/*.csv
+data/*.pdf
+data/dunnhumby/
+
+# Model artifacts
+models/
+outputs/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+.eggs/
+dist/
+build/
+*.egg
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Environment
+*.env
+.venv/
+env/
+venv/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Misc
+*.bak
+*.docx
+*.pptx
+*.mp4
